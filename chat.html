@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    html, body, iframe {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script>
+    var fs = require('fs');
+
+    function run() {
+      var webview = document.getElementById('webview');
+      var indicator = document.querySelector('.indicator');
+
+      var loadstart = function() {
+        indicator.innerText = 'Loading...';
+      };
+
+      var loadstop = function() {
+        indicator.innerText = '';
+      };
+
+      var domready = function() {
+        fs.readFile(__dirname + '/style.css', 'utf8', function(error, data) {
+          webview.insertCSS(data);
+        });
+
+        fs.readFile(__dirname + '/webview.js', 'utf8', function(error, data) {
+          webview.executeJavaScript(data);
+        });
+
+        webview.openDevTools();
+      };
+
+      webview.addEventListener('did-start-loading', loadstart);
+      webview.addEventListener('did-stop-loading', loadstop);
+      webview.addEventListener('dom-ready', domready);
+    }
+
+    window.onload = run;
+  </script>
+</head>
+
+<body>
+  <webview id="webview" src="https://www.messenger.com">
+    <div class="indicator"></div>
+  </webview>
+</body>
+
+</html>
