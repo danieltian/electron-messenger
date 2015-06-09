@@ -4,11 +4,11 @@ Facebook Messenger as a desktop app using Electron. This project converts https:
 ### Install
 Install Electron:
 
-```npm install electron-prebuilt -g```
+    npm install electron-prebuilt -g
 
 ### Run
 Run the following command:
 
-```electron electron-messenger```
+    electron electron-messenger
 
 where `electron-messenger` is the name of the folder.
