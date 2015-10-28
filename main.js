@@ -49,7 +49,6 @@ app.on('ready', function() {
     });
 
     win.loadUrl('https://www.messenger.com');
-    win.openDevTools();
 
     win.webContents.on('dom-ready', function() {
       console.log('dom ready');
@@ -61,9 +60,6 @@ app.on('ready', function() {
       win.webContents.executeJavaScript('document.querySelector(\'a[data-reactid*="' + frameName + '"]\').click();');
     });
   });
-
-  // Open the devtools.
-  mainWindow.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
